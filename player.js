@@ -10,6 +10,11 @@ class Player{
         this.moveAcceleration = 2;
         this.moveDeceleration = -2;
         this.moveSpeed = 0;
+        this.playerImage = new Image();
+        this.playerImage.src = 'sprites/elisa-spritesheet1.png';
+        this.spriteWidth = 50;
+        this.spriteHeight = 50;
+        this.frameX = 0;
         this.affectedByGravity = true;
     }
 
@@ -23,8 +28,10 @@ class Player{
     }
 
     draw(){
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0)';
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        //ctx.drawImage(this.playerImage, sx, sy, sw, sh, dx, dy, dw, dh);
+        ctx.drawImage(this.playerImage, 4 + this.frameX * this.spriteWidth, 4, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     }
 
     friction(){

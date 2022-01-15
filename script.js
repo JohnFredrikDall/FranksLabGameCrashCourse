@@ -32,7 +32,6 @@ function animate(timestamp){
     player.checkForCollision();
     player.update();
     player.draw();
-
     
     requestAnimationFrame(animate);
 }
