@@ -10,7 +10,7 @@ class Player{
         this.moveAcceleration = 2;
         this.moveDeceleration = -2;
         this.moveSpeed = 0;
-        this.hasHitTerrain = false;
+        this.affectedByGravity = true;
     }
 
     update(){
@@ -38,8 +38,12 @@ class Player{
     }
 
     checkForCollision(){
-        if(this.hasHitTerrain){
+        if(!this.affectedByGravity){
             this.gravitySpeed = 0;
+            this.gravity = 0;
+        }
+        else{
+          this.gravity = 0.1;
         }
     }
 
@@ -48,7 +52,7 @@ class Player{
         var bottom = canvas.height - this.height;
         if(this.y > bottom) {
             this.y = bottom;
-            this.hasHitTerrain = true;
+            this.affectedByGravity = false;
         }
     }
 
