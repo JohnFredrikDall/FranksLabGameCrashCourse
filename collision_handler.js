@@ -1,4 +1,4 @@
-class CollisionHandler{
+export default class CollisionHandler{
     constructor(){}
 
     detectCollision(player, terrainArray){

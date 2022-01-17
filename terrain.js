@@ -1,5 +1,5 @@
-class Terrain {
-    constructor(){
+export default class Terrain {
+    constructor(ctx, canvas){
         this.width = 300;
         this.height = 50;
         this.x = canvas.width;
