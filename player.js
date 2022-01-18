@@ -1,3 +1,5 @@
+import { IdleLeft, IdleRight, RunningLeft, RunningRight } from "./state.js";
+
 export default class Player {
   constructor(width, height, color, x, y, ctx, canvas) {
     this.width = width;
@@ -11,7 +13,7 @@ export default class Player {
     this.gravitySpeed = 0;
     this.moveAcceleration = 2;
     this.moveDeceleration = -2;
-    this.states = [];
+    this.states = [new IdleLeft(this), new IdleRight(this), new RunningLeft(this), new RunningRight(this)];
     this.currentState = this.states[0];
     this.moveSpeed = 0;
     this.playerImage = new Image();
@@ -19,43 +21,43 @@ export default class Player {
     this.spriteWidth = 50;
     this.spriteHeight = 50;
     this.state = 'idle';
-    this.timeBetweenEachFrame = 25;
+    this.timeBetweenEachFrame = 30;
     this.counter = 0;
-    this.sprites = {
+    this.spritesCoordinates = {
       idle: [
         { x: 5, y: 4 },
         { x: 15, y: 4 },
         { x: 20, y: 4 },
       ],
       jumping: [
-        {x: 10, y:65},
-        {x: 20, y:65},
-        {x: 25, y:65},
-        {x: 30, y:65}
+        { x: 10, y: 65 },
+        { x: 20, y: 65 },
+        { x: 25, y: 65 },
+        { x: 30, y: 65 }
       ],
       running: [
-        {x: 5, y: 122},
-        {x: 15, y: 122},
-        {x: 20, y: 122},
-        {x: 30, y: 122},
-        {x: 35, y: 122},
-        {x: 40, y: 122},
-        {x: 50, y: 122},
-        {x: 55, y: 122}
-      ] 
+        { x: 5, y: 122 },
+        { x: 15, y: 122 },
+        { x: 20, y: 122 },
+        { x: 30, y: 122 },
+        { x: 35, y: 122 },
+        { x: 40, y: 122 },
+        { x: 50, y: 122 },
+        { x: 55, y: 122 }
+      ]
     };
     this.frame = 0;
-
-    this.extraStepX = 10;
     this.affectedByGravity = true;
   }
 
-  update() {
+  update(input) {
     this.gravitySpeed += this.gravity;
+    this.currentState.handleInput(input)
     this.y += this.gravitySpeed;
     this.friction();
     this.x += this.moveSpeed;
     this.hitBottom();
+    
 
   }
 
@@ -65,15 +67,16 @@ export default class Player {
     //Brukes til å teste drawImage() ATM
     let x = 30;
     let y = 65;
-    let frame = this.spriteAnimation();
+    this.calculateSpriteFrames();
     //ctx.drawImage(this.playerImage, sx, sy, sw, sh, dx, dy, dw, dh);
-    this.ctx.drawImage(this.playerImage, frame.x + this.frame * this.spriteWidth, frame.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+    //ctx.drawImage(this.playerImage, frame.x + this.frame * this.spriteWidth, frame.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     //ctx.drawImage(this.playerImage, x + this.frame * this.spriteWidth, y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
   }
 
   friction() {
     if (this.moveSpeed > 0.2) {
       this.moveSpeed += -0.2;
+      console.log('friction');
     } else if (this.moveSpeed < -0.2) {
       this.moveSpeed += 0.2;
     } else {
@@ -95,6 +98,7 @@ export default class Player {
   hitBottom() {
     var bottom = this.canvas.height - this.height;
     if (this.y > bottom) {
+      
       this.y = bottom;
       this.affectedByGravity = false;
     }
@@ -120,39 +124,139 @@ export default class Player {
     }
   }
 
-  spriteAnimation() {
-    if(this.state === 'jumping') {
-      if(this.counter < this.timeBetweenEachFrame){
+  setState(state) {
+    this.currentState = this.states[state];
+    this.currentState.enter();
+  }
+
+  calculateSpriteFrames() {
+    if (this.currentState.state === 'IDLE LEFT') {
+      if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.idle[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
       }
       else {
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.idle[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
         this.counter = 0;
-        if(this.frame < 3) this.frame ++;
-        else this.frame = 1; 
+        if(this.frame < this.spritesCoordinates.idle.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
       }
-      return this.sprites.jumping[this.frame];
     }
-    if(this.state === 'running') {
-      if(this.counter < this.timeBetweenEachFrame){
+    if (this.currentState.state === 'IDLE RIGHT') {
+      if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.idle[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
       }
       else {
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.idle[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
         this.counter = 0;
-        if(this.frame < 7) this.frame ++;
-        else this.frame = 0;
+        if(this.frame < this.spritesCoordinates.idle.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
       }
-      return this.sprites.running[this.frame];
     }
-    if(this.state === 'idle') {
-      if(this.counter < this.timeBetweenEachFrame){
+    if (this.currentState.state === 'RUNNING LEFT') {
+      if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.running[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
       }
       else {
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.running[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
         this.counter = 0;
-        if(this.frame < 2) this.frame ++;
-        else this.frame = 0;
+        if(this.frame < this.spritesCoordinates.running.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
       }
-      return this.sprites.idle[this.frame];
+    }
+    if (this.currentState.state === 'RUNNING RIGHT') {
+      if (this.counter < this.timeBetweenEachFrame) {
+        this.counter++;
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.running[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+      }
+      else {
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.running[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+        this.counter = 0;
+        if(this.frame < this.spritesCoordinates.running.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
+      }
     }
   }
 }

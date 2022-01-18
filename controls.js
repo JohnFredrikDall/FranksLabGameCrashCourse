@@ -1,53 +1,67 @@
 export default class Controls {
-    constructor() {
+
+    constructor(player) {
+        this.player = player;
+        this.keys = [];
         this.lastKey = '';
-        window.addEventListener('keydown', (e) =>{
+        window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case "ArrowLeft":
+                    this.keys[e.key] = true;
                     this.lastKey = "PRESS left";
+                    break;
                 case "ArrowRight":
+                    this.keys[e.key] = true;
                     this.lastKey = "PRESS right";
+                    break;
                 case "ArrowDown":
+                    this.keys[e.key] = true;
                     this.lastKey = "PRESS down";
+                    break;
                 case "ArrowUp":
+                    this.keys[e.key] = true;
                     this.lastKey = "PRESS up";
+                    break;
             }
         });
 
         window.addEventListener('keyup', (e) => {
             switch (e.key) {
                 case "ArrowLeft":
+                    this.keys[e.key] = false;
                     this.lastKey = "RELEASE left";
+                    break;
                 case "ArrowRight":
+                    this.keys[e.key] = false;
                     this.lastKey = "RELEASE right";
+                    break;
                 case "ArrowDown":
+                    this.keys[e.key] = false;
                     this.lastKey = "RELEASE down";
+                    break;
                 case "ArrowUp":
+                    this.keys[e.key] = false;
                     this.lastKey = "RELEASE up";
+                    break;
             }
         });
     }
 
-    movePlayer(player, keys) {
-        if (keys && keys["ArrowLeft"]) {
-            //player.state = 'running';
-            this.arrowLeft(player);
-        }
-        if (keys && keys["ArrowRight"]) {
-            //player.state = 'running';
-            this.arrowRight(player);
-        }
-        if (keys && keys["ArrowDown"]) {
-            //player.state = 'idle';
-            this.arrowDown(player);
-        }
-        if (keys && keys["ArrowUp"]) {
-            // player.state = 'jumping';
-            this.arrowUp(player);
-        }
 
+    movePlayer() {
+        if (this.keys["ArrowLeft"]) {
+            this.arrowLeft(this.player);
+        }
+        if (this.keys["ArrowRight"]) {
+            this.arrowRight(this.player);
+        }
+        if (this.keys["ArrowDown"]) {
+            this.arrowDown(this.player);
+        }
+        if (this.keys["ArrowUp"]) {
+            this.arrowUp(this.player);
+        }
     }
-
     arrowLeft(player) {
         player.x += -1;
     }
@@ -67,10 +81,4 @@ export default class Controls {
             player.affectedByGravity = true;
         }
     }
-
 }
-
-
-
-
-
