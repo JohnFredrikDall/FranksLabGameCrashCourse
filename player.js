@@ -1,4 +1,5 @@
 import { IdleLeft, IdleRight, RunningLeft, RunningRight } from "./state.js";
+import { flipSpriteHorizontally } from "./utils.js";
 
 export default class Player {
   constructor(width, height, color, x, y, ctx, canvas) {
@@ -133,7 +134,7 @@ export default class Player {
     if (this.currentState.state === 'IDLE LEFT') {
       if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
-        this.ctx.drawImage(this.playerImage,
+        flipSpriteHorizontally(this.ctx, this.playerImage,
           this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
           this.spritesCoordinates.idle[this.frame].y,
           this.spriteWidth,
@@ -144,7 +145,7 @@ export default class Player {
           this.height);
       }
       else {
-        this.ctx.drawImage(this.playerImage,
+        flipSpriteHorizontally(this.ctx,this.playerImage,
           this.spritesCoordinates.idle[this.frame].x + this.frame * this.spriteWidth,
           this.spritesCoordinates.idle[this.frame].y,
           this.spriteWidth,
@@ -197,7 +198,7 @@ export default class Player {
     if (this.currentState.state === 'RUNNING LEFT') {
       if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
-        this.ctx.drawImage(this.playerImage,
+        flipSpriteHorizontally(this.ctx, this.playerImage,
           this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
           this.spritesCoordinates.running[this.frame].y,
           this.spriteWidth,
@@ -208,7 +209,7 @@ export default class Player {
           this.height);
       }
       else {
-        this.ctx.drawImage(this.playerImage,
+        flipSpriteHorizontally(this.ctx,this.playerImage,
           this.spritesCoordinates.running[this.frame].x + this.frame * this.spriteWidth,
           this.spritesCoordinates.running[this.frame].y,
           this.spriteWidth,
