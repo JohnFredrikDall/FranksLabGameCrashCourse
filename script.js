@@ -12,7 +12,7 @@ window.addEventListener('load', function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let terrainArray = [];
-    const player = new Player(50, 50, 'red', 10, 110, ctx, canvas);
+    const player = new Player(50, 50, 10, 110, ctx, canvas);
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
     // for (let index = 100; index < 1000; index+=100) {

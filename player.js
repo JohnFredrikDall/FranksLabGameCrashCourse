@@ -2,10 +2,9 @@ import { IdleLeft, IdleRight, RunningLeft, RunningRight } from "./state.js";
 import { flipSpriteHorizontally } from "./utils.js";
 
 export default class Player {
-  constructor(width, height, color, x, y, ctx, canvas) {
+  constructor(width, height, x, y, ctx, canvas) {
     this.width = width;
     this.height = height;
-    this.color = color;
     this.x = x;
     this.y = y;
     this.canvas = canvas;
@@ -21,9 +20,6 @@ export default class Player {
     this.playerImage.src = 'sprites/elisa-spritesheet1.png';
     this.spriteWidth = 50;
     this.spriteHeight = 50;
-    this.state = 'idle';
-    this.timeBetweenEachFrame = 30;
-    this.counter = 0;
     this.spritesCoordinates = {
       idle: [
         { x: 5, y: 4 },
@@ -47,6 +43,8 @@ export default class Player {
         { x: 55, y: 122 }
       ]
     };
+    this.timeBetweenEachFrame = 30;
+    this.counter = 0;
     this.frame = 0;
     this.affectedByGravity = true;
   }
@@ -58,8 +56,6 @@ export default class Player {
     this.friction();
     this.x += this.moveSpeed;
     this.hitBottom();
-    
-
   }
 
   draw() {
