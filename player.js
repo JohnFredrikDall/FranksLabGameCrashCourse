@@ -1,4 +1,4 @@
-import { IdleLeft, IdleRight, RunningLeft, RunningRight } from "./state.js";
+import { IdleLeft, IdleRight, RunningLeft, RunningRight, JumpingLeft, JumpingRight } from "./state.js";
 import { flipSpriteHorizontally } from "./utils.js";
 
 export default class Player {
@@ -13,7 +13,14 @@ export default class Player {
     this.gravitySpeed = 0;
     this.moveAcceleration = 2;
     this.moveDeceleration = -2;
-    this.states = [new IdleLeft(this), new IdleRight(this), new RunningLeft(this), new RunningRight(this)];
+    this.states = [
+      new IdleLeft(this), 
+      new IdleRight(this), 
+      new RunningLeft(this), 
+      new RunningRight(this),
+      new JumpingLeft(this),
+      new JumpingRight(this)
+    ];
     this.currentState = this.states[0];
     this.moveSpeed = 0;
     this.playerImage = new Image();
@@ -61,10 +68,11 @@ export default class Player {
   draw() {
     this.ctx.fillStyle = 'rgba(0, 0, 0, 0)';
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.drawSpriteFrames();
+
     //Brukes til å teste drawImage() ATM
-    let x = 30;
-    let y = 65;
-    this.calculateSpriteFrames();
+    // let x = 30;
+    // let y = 65;
     //ctx.drawImage(this.playerImage, sx, sy, sw, sh, dx, dy, dw, dh);
     //ctx.drawImage(this.playerImage, frame.x + this.frame * this.spriteWidth, frame.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     //ctx.drawImage(this.playerImage, x + this.frame * this.spriteWidth, y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
@@ -126,7 +134,7 @@ export default class Player {
     this.currentState.enter();
   }
 
-  calculateSpriteFrames() {
+  drawSpriteFrames() {
     if (this.currentState.state === 'IDLE LEFT') {
       if (this.counter < this.timeBetweenEachFrame) {
         this.counter++;
@@ -248,6 +256,70 @@ export default class Player {
           this.height);
         this.counter = 0;
         if(this.frame < this.spritesCoordinates.running.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
+      }
+    }
+    if(this.currentState.state === 'JUMPING LEFT'){
+      if (this.counter < this.timeBetweenEachFrame) {
+        this.counter++;
+        flipSpriteHorizontally(this.ctx, this.playerImage,
+          this.spritesCoordinates.jumping[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.jumping[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+      }
+      else {
+        flipSpriteHorizontally(this.ctx,this.playerImage,
+          this.spritesCoordinates.jumping[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.jumping[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+        this.counter = 0;
+        if(this.frame < this.spritesCoordinates.jumping.length-1) {
+          this.frame ++;
+        }
+        else {
+          this.frame = 0;
+        }
+      }
+    }
+    if (this.currentState.state === 'JUMPING RIGHT') {
+      if (this.counter < this.timeBetweenEachFrame) {
+        this.counter++;
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.jumping[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.jumping[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+      }
+      else {
+        this.ctx.drawImage(this.playerImage,
+          this.spritesCoordinates.jumping[this.frame].x + this.frame * this.spriteWidth,
+          this.spritesCoordinates.jumping[this.frame].y,
+          this.spriteWidth,
+          this.spriteHeight,
+          this.x,
+          this.y,
+          this.width,
+          this.height);
+        this.counter = 0;
+        if(this.frame < this.spritesCoordinates.jumping.length-1) {
           this.frame ++;
         }
         else {
