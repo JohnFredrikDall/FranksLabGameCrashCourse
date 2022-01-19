@@ -15,13 +15,6 @@ window.addEventListener('load', function(){
     const player = new Player(50, 50, 10, 110, ctx, canvas);
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
-    // for (let index = 100; index < 1000; index+=100) {
-    //     const kekw = new Terrain(ctx, canvas);
-    //     kekw.y = index;
-    //     kekw.x = index/2;
-    //     terrainArray.push(kekw);
-    // }
-
 
 //animation loop
 function animate(timestamp){
@@ -29,20 +22,11 @@ function animate(timestamp){
     
     collisionHandler.detectCollision(player, terrainArray);
 
-    for (let i = 0; i < terrainArray.length; i++) {
-        terrainArray[i].update();
-        terrainArray[i].draw();
-    }
-
-
-    
     player.checkForCollision();
     player.update(controls.lastKey);
     player.draw();
-    // console.log(controls.keys);
+    
     controls.movePlayer();
-    // console.log(controls.keys["ArrowRight"]);
-    //console.log(player.currentState.state);
 
     drawStatusText(ctx, controls, player);
     requestAnimationFrame(animate);

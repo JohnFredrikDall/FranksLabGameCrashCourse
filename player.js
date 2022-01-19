@@ -81,7 +81,6 @@ export default class Player {
   friction() {
     if (this.moveSpeed > 0.2) {
       this.moveSpeed += -0.2;
-      console.log('friction');
     } else if (this.moveSpeed < -0.2) {
       this.moveSpeed += 0.2;
     } else {
@@ -106,6 +105,7 @@ export default class Player {
       
       this.y = bottom;
       this.affectedByGravity = false;
+      //this.setState(1);
     }
   }
 
