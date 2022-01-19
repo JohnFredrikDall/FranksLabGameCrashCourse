@@ -11,6 +11,7 @@ export default class CollisionHandler{
                         if(this.correctDistanceFromTerrain(player, terrain)){
                             player.affectedByGravity = false;
                             player.y = terrain.y - terrain.height;
+                            player.setState(1);
                         }
                     }
                 }

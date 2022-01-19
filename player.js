@@ -11,8 +11,6 @@ export default class Player {
     this.ctx = ctx;
     this.gravity = 0.1;
     this.gravitySpeed = 0;
-    this.moveAcceleration = 2;
-    this.moveDeceleration = -2;
     this.states = [
       new IdleLeft(this), 
       new IdleRight(this), 
@@ -22,7 +20,6 @@ export default class Player {
       new JumpingRight(this)
     ];
     this.currentState = this.states[0];
-    this.moveSpeed = 0;
     this.playerImage = new Image();
     this.playerImage.src = 'sprites/elisa-spritesheet1.png';
     this.spriteWidth = 50;
@@ -60,8 +57,8 @@ export default class Player {
     this.gravitySpeed += this.gravity;
     this.currentState.handleInput(input)
     this.y += this.gravitySpeed;
-    this.friction();
-    this.x += this.moveSpeed;
+    // this.friction();
+    // this.x += this.moveSpeed;
     this.hitBottom();
   }
 
@@ -78,16 +75,6 @@ export default class Player {
     //ctx.drawImage(this.playerImage, x + this.frame * this.spriteWidth, y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
   }
 
-  friction() {
-    if (this.moveSpeed > 0.2) {
-      this.moveSpeed += -0.2;
-    } else if (this.moveSpeed < -0.2) {
-      this.moveSpeed += 0.2;
-    } else {
-      this.moveSpeed = 0.0;
-    }
-  }
-
   checkForCollision() {
     if (!this.affectedByGravity) {
       this.gravitySpeed = 0;
@@ -102,30 +89,9 @@ export default class Player {
   hitBottom() {
     var bottom = this.canvas.height - this.height;
     if (this.y > bottom) {
-      
       this.y = bottom;
       this.affectedByGravity = false;
-      //this.setState(1);
-    }
-  }
-
-  positiveMovement() {
-    this.moveSpeed += this.moveAcceleration;
-
-    if (this.moveSpeed > 6) {
-      this.moveSpeed = 6;
-      this.x += this.moveSpeed;
-    } else {
-      this.x += this.moveSpeed;
-    }
-  }
-  negativeMovement() {
-    this.moveSpeed += this.moveDeceleration;
-    if (this.moveSpeed < -6) {
-      this.moveSpeed = -6;
-      this.x += this.moveSpeed;
-    } else {
-      this.x += this.moveSpeed;
+      this.setState(1);
     }
   }
 

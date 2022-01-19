@@ -13,8 +13,10 @@ window.addEventListener('load', function(){
     canvas.height = window.innerHeight;
     let terrainArray = [];
     const player = new Player(50, 50, 10, 110, ctx, canvas);
+    const terrain = new Terrain(ctx, canvas);
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
+    terrainArray.push(terrain);
 
 //animation loop
 function animate(timestamp){
@@ -25,14 +27,12 @@ function animate(timestamp){
     player.checkForCollision();
     player.update(controls.lastKey);
     player.draw();
-    
+
+    terrain.draw();
     controls.movePlayer();
 
     drawStatusText(ctx, controls, player);
     requestAnimationFrame(animate);
 }
-
-
 animate(0); 
-
 });
