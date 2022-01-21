@@ -25,9 +25,8 @@ export class IdleLeft extends State {
         if(input === 'PRESS right') this.player.setState(states.IDLE_RIGHT)
         if(input === 'PRESS left') this.player.setState(states.RUNNING_LEFT)
         if(input === 'PRESS up') {
-            console.log('kekw');
             this.player.setState(states.JUMPING_LEFT);
-            console.log(states);
+    
         }
     }
 }

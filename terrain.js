@@ -3,7 +3,7 @@ export default class Terrain {
         this.width = 300;
         this.height = 50;
         this.x = 100;
-        this.y = 900;
+        this.y = 1000;
         // this.y = canvas.height - 100;
         this.directionX = Math.random() * 1 + 0;
         this.directionY = Math.random() * 5 - 2.5;
