@@ -91,7 +91,6 @@ export default class Player {
     if (this.y > bottom) {
       this.y = bottom;
       this.affectedByGravity = false;
-      this.setState(1);
     }
   }
 
