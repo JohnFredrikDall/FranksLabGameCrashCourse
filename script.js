@@ -3,6 +3,7 @@ import Controls from './controls.js';
 import CollisionHandler from './collision_handler.js';
 import Terrain from './terrain.js';
 import {drawStatusText} from './utils.js';
+import Background from './background.js';
 
 window.addEventListener('load', function(){
     const loading = document.getElementById('loading');
@@ -18,6 +19,13 @@ window.addEventListener('load', function(){
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
 
+    const canvasBG0 = document.getElementById('canvasBG0')
+    const ctxBG0 = canvasBG0.getContext('2d');
+    var BG0 = new Background(ctxBG0, canvasBG0);
+    var src="sprites/moon-transparent.png"
+    BG0.getImage(src);
+    
+
 //animation loop
 function animate(timestamp){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -27,6 +35,8 @@ function animate(timestamp){
     player.checkForCollision();
     player.update(controls.lastKey);
     player.draw();
+
+    BG0.drawBackground(canvasBG0.width, canvasBG0.height)
 
     terrain.draw();
     controls.movePlayer();
