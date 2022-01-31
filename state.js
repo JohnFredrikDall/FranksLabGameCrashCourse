@@ -23,7 +23,12 @@ export class IdleLeft extends State {
     }
     handleInput(input){
         if(input === 'PRESS right') this.player.setState(states.IDLE_RIGHT)
-        if(input == 'PRESS left') this.player.setState(states.RUNNING_LEFT)
+        if(input === 'PRESS left') this.player.setState(states.RUNNING_LEFT)
+        if(input === 'PRESS up') {
+            console.log('kekw');
+            this.player.setState(states.JUMPING_LEFT);
+            console.log(states);
+        }
     }
 }
 
@@ -79,10 +84,11 @@ export class JumpingLeft extends State {
         this.player = player;
     }
     enter(){
+        
         this.player.frame = 0;
     }
     handleInput(input) {
-        if(input === 'PRESS up') this.player.setState(states.JUMPING_RIGHT)
+        if(input === 'PRESS right') this.player.setState(states.JUMPING_RIGHT)
     }
 }
 
@@ -96,6 +102,7 @@ export class JumpingRight extends State {
     }
     handleInput(input) {
         if(input === 'PRESS up') this.player.setState(states.JUMPING_RIGHT)
+        if(input === 'PRESS left') this.player.setState(states.JUMPING_LEFT)
     }
 }
 

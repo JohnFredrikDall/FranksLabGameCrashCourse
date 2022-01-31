@@ -12,11 +12,11 @@ window.addEventListener('load', function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let terrainArray = [];
-    const player = new Player(50, 50, 10, 110, ctx, canvas);
     const terrain = new Terrain(ctx, canvas);
+    terrainArray.push(terrain);
+    const player = new Player(50, 50, 10, 110, ctx, canvas);
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
-    terrainArray.push(terrain);
 
 //animation loop
 function animate(timestamp){
