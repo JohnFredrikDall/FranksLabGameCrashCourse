@@ -63,9 +63,9 @@ function animate(timestamp){
     console.log(checkState)
     if(checkState== 2 ){
         BGm1.update()
-}if(checkState== 1){
+    }if(checkState== 1){
     BGm1.updateReverse();
-}
+    }
     //BGm1.update(x,x2, canvasBGm1, gamespeed)
     
 

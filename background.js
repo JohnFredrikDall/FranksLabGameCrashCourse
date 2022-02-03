@@ -35,28 +35,7 @@ export default class Background{
         }
      
 
-        /*update(x,x2, canvasBGm1, gamespeed){
-            if(x < -canvasBGm1.width){
-                x=canvasBGm1.width + x2 - gamespeed;
-            }else{
-                x -= gamespeed;
-            }
-            if(x2 < -canvasBGm1.width){
-                x2= canvasBGm1.width +x -gamespeed;
-            }else{
-                x2 -= gamespeed;
-            }
-            
-              if(this.x < -this.canvasBG.width){
-                this.x=this.canvasBG.width + this.x2 - this.gamespeed;
-                    }else{
-                        this.x -= this.gamespeed;
-                    }
-                if(this.x2 < -this.canvasBG.width){
-                        this.x2= this.canvasBG.width +this.x -this.gamespeed;
-                    }else{
-                        this.x2 -= this.gamespeed;
-                    }*/
+  
     
     }
 
