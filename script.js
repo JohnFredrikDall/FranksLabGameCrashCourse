@@ -32,7 +32,7 @@ window.addEventListener('load', function(){
     const canvasBGm1 = document.getElementById('canvasBG-1')
     const ctxBGm1 = canvasBGm1.getContext('2d')
 
-    var x2=canvasBGm1.width;
+    var x2=canvasBGm1.width;// Denne må være her
 
     var BGm1 = new Background(ctxBGm1, canvasBGm1,"sprites/exterior-parallaxBG1.png",x,x2,gamespeed)
     var src ="sprites/exterior-parallaxBG1.png"
@@ -59,7 +59,13 @@ function animate(timestamp){
     BGm1.drawBackground();
     //BGm1.drawBackground(x,y,canvasBGm1.width, canvasBGm1.height)
     //BGm1.drawBackground(x2,y, canvasBGm1.width, canvasBGm1.height);
-    BGm1.update()
+    var checkState = player.checkMoving()
+    console.log(checkState)
+    if(checkState== 2 ){
+        BGm1.update()
+}if(checkState== 1){
+    BGm1.updateReverse();
+}
     //BGm1.update(x,x2, canvasBGm1, gamespeed)
     
 
