@@ -52,7 +52,7 @@ function animate(timestamp){
     player.update(controls.lastKey);
     player.draw();
 
-    BG0.drawBackground(0,0,canvasBG0.width, canvasBG0.height)
+    BG0.drawMoon()
     //BG0.drawBackground(0,0,canvasBG0.width, canvasBG0.height)
 
     

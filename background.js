@@ -12,19 +12,22 @@ export default class Background{
         this.x3=-x2
         this.gamespeed=gamespeed;
 
-        console.log(this.x+" "+this.y + " " + this.x2 +" " + this.gamespeed)
+        console.log(imageLoc)
     }
 
     getImage(backgroundSRC){
         this.backgroundLayer.src=backgroundSRC;
     }
 
+    drawMoon(){
+        this.ctx.drawImage(this.backgroundLayer,0,0,this.canvasBG.width, this.canvasBG.height)
+        
+    }
     drawBackground(){
         this.ctx.drawImage(this.backgroundLayer,this.x,this.y,this.canvasBG.width, this.canvasBG.height)
         this.ctx.drawImage(this.backgroundLayer,this.x +this.canvasBG.width, this.y, this.canvasBG.width, this.canvasBG.height  )
         this.ctx.drawImage(this.backgroundLayer,this.x - this.canvasBG.width, this.y, this.canvasBG.width, this.canvasBG.height  )
-        console.log(this.x)
-        console.log(-this.canvasBG.width)
+        
     }
 
     update(){
