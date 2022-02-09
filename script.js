@@ -15,9 +15,10 @@ window.addEventListener('load', function(){
     let terrainArray = [];
     const terrain = new Terrain(ctx, canvas);
     terrainArray.push(terrain);
-    const player = new Player(50, 50, 10, 110, ctx, canvas);
+    const player = new Player(50, 50, 10, 500, ctx, canvas);
     let collisionHandler = new CollisionHandler();
     const controls = new Controls(player);
+
 
     var x=0;
     var y=0;
