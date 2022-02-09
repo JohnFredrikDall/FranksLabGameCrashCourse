@@ -1,9 +1,10 @@
 import Player from './player.js';
 import Controls from './controls.js';
 import CollisionHandler from './collision_handler.js';
-import Terrain from './terrain.js';
+import Terrain from './terrain/terrain.js';
 import {drawStatusText} from './utils.js';
 import Background from './background.js';
+import Platform1 from './terrain/platform1.js';
 
 window.addEventListener('load', function(){
     const loading = document.getElementById('loading');
@@ -13,7 +14,9 @@ window.addEventListener('load', function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let terrainArray = [];
-    const terrain = new Terrain(ctx, canvas);
+    const terrain = new Platform1(ctx, canvas, 100, 900, 150, 50);
+    console.log(terrain);
+    //const platform = new Platform1(ctx, canvas, 400, 900, 150, 50);
     terrainArray.push(terrain);
     const player = new Player(50, 50, 10, 500, ctx, canvas);
     let collisionHandler = new CollisionHandler();
