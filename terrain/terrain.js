@@ -1,18 +1,18 @@
 export default class Terrain {
-    constructor(ctx, canvas){
-        this.x = 100;
-        this.y = 700;
-        this.width = 150;
-        this.height = 50;
-        this.spriteHeight = 13;
-        this.spriteWidth = 47;
+    constructor(ctx, canvas, x, y, width, height, select){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.canvas = canvas;
         this.ctx = ctx;
+        this.select = select;
+
         this.terrainImage = new Image();
         this.terrainImage.src = 'sprites/twilight-tiles.png';
-        this.spriteCoordinates = {x: 0, y: 0}
-        //this.spriteCoordinates2 = {x: 66, y: 16, spriteWidth: 44, spriteHeight: 11} 
-        
+        let spriteCoordinates = [];
+        spriteCoordinates.push({x: 0, y: 0, spriteHeight: 13, spriteWidth: 47});
+        spriteCoordinates.push({x: 66, y: 16, spriteWidth: 44, spriteHeight: 11});
     } 
     
     update(){
@@ -21,9 +21,10 @@ export default class Terrain {
     }
 
     draw(){
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+        this.ctx.fillStyle = 'Black';
         this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.ctx.drawImage(this.terrainImage, this.spriteCoordinates.x, this.spriteCoordinates.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+        //this.ctx.drawImage(this.terrainImage, this.spriteCoordinates[this.select].x, this.spriteCoordinates[this.select].y, this.spriteCoordinates[this.select].spriteWidth, this.spriteCoordinates[this.select].spriteHeight, this.x, this.y, this.width, this.height);
+        
     }
    
 }
