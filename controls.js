@@ -56,22 +56,22 @@ export default class Controls {
             this.arrowRight(this.player);
         }
         if (this.keys["ArrowDown"]) {
-            this.arrowDown(this.player);
+            //this.arrowDown(this.player);
         }
         if (this.keys["ArrowUp"]) {
             this.arrowUp(this.player);
         }
     }
     arrowLeft(player) {
-        player.x += -1;
+        player.x += -5;
     }
 
     arrowRight(player) {
-        player.x += 1;
+        player.x += 5;
     }
 
     arrowDown(player) {
-        player.y += 1;
+        player.y += 5;
     }
 
     arrowUp(player) {
