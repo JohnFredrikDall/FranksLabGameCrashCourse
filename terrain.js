@@ -2,11 +2,11 @@ export default class Terrain {
     constructor(ctx, canvas){
         this.width = 300;
         this.height = 50;
-        this.x = 100;
-        this.y = 1000;
+        this.x = 200;
+        this.y = 820;
         // this.y = canvas.height - 100;
-        this.directionX = Math.random() * 1 + 0;
-        this.directionY = Math.random() * 5 - 2.5;
+        //this.directionX = Math.random() * 1 + 0;
+        //this.directionY = Math.random() * 5 - 2.5;
         this.ctx = ctx;
     } 
     
