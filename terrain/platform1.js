@@ -1,4 +1,4 @@
-import Terrain from "./terrain";
+/*import Terrain from "./terrain";
 
 export default class Platform1 extends Terrain{
     constructor(ctx, canvas, x, y, width, height){
@@ -10,4 +10,4 @@ export default class Platform1 extends Terrain{
         super(width);
         super(height);
     }
-}
+}*/
