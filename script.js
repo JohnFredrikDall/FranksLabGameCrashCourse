@@ -4,13 +4,15 @@ import CollisionHandler from './collision_handler.js';
 import Terrain from './terrain.js';
 import {drawStatusText} from './utils.js';
 import Background from './background.js';
+import Mountains from './background.js';
 
 window.addEventListener('load', function(){
     const loading = document.getElementById('loading');
     loading.style.display = 'none';
     const canvas = /** @type {HTMLCanvasElement} */(document.getElementById('canvas1'));
     const ctx = /** @type {CanvasRenderingContext2D} */(canvas.getContext('2d'));
-    canvas.width = window.innerWidth;
+    canvas.width= window.innerWidth;
+    console.log("window width"+ this.window.innerWidth)
     canvas.height = window.innerHeight;
     let terrainArray = [];
     const player = new Player(50, 50, 10, 110, ctx, canvas);
@@ -27,6 +29,7 @@ window.addEventListener('load', function(){
     const canvasBG0 = document.getElementById('canvasBG0')
     const ctxBG0 = canvasBG0.getContext('2d');
     var BG0 = new Background(ctxBG0, canvasBG0, "./sprites/moon-transparent.png");
+    
     var src="./sprites/moon-transparent.png"
     //BG0.getImage(src);
     const canvasBGm1 = document.getElementById('canvasBG-1')
@@ -34,7 +37,7 @@ window.addEventListener('load', function(){
 
     var x2=canvasBGm1.width;// Denne må være her
 
-    var BGm1 = new Background(ctxBGm1, canvasBGm1,"sprites/exterior-parallaxBG1.png",x,x2,gamespeed)
+    var BGm1 = new Background(ctxBGm1, canvasBGm1,"sprites/exterior-parallaxBG1.png",x,x2,gamespeed, player, this.window.innerWidth)
     var src ="sprites/exterior-parallaxBG1.png"
     //BGm1.getImage(src)
 
@@ -60,10 +63,10 @@ function animate(timestamp){
     //BGm1.drawBackground(x,y,canvasBGm1.width, canvasBGm1.height)
     //BGm1.drawBackground(x2,y, canvasBGm1.width, canvasBGm1.height);
     var checkState = player.checkMoving()
-    console.log(checkState)
+    
     if(checkState== 2 ){
         BGm1.update()
-    }if(checkState== 1){
+    }else if(checkState== 1){
     BGm1.updateReverse();
     }
     //BGm1.update(x,x2, canvasBGm1, gamespeed)

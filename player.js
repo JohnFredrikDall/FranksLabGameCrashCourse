@@ -87,7 +87,7 @@ export default class Player {
 
    checkMoving(){
     if(this.currentState.state == 'RUNNING LEFT' ||this.currentState.state== 'JUMPING LEFT'){
-      console.log(this.currentState.state)
+      
       return 1;
     }if (this.currentState.state == 'RUNNING RIGHT'|| this.currentState.state== 'JUMPING RIGHT') {
       return 2;
