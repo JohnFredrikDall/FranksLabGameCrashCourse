@@ -1,8 +1,8 @@
 export default class Terrain {
     constructor(ctx, canvas){
         this.x = 100;
-        this.y = 700;
-        this.width = 150;
+        this.y = 850;
+        this.width = 250;
         this.height = 50;
         this.spriteHeight = 13;
         this.spriteWidth = 47;

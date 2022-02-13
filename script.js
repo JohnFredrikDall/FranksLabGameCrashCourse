@@ -13,7 +13,7 @@ window.addEventListener('load', function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let terrainArray = [];
-    const terrain = new Terrain(ctx, canvas, 100, 900, 150, 50);
+    const terrain = new Terrain(ctx, canvas, 100, 900, 150, 50);    
     //const platform = new Platform1(ctx, canvas, 400, 900, 150, 50);
     terrainArray.push(terrain);
     const player = new Player(50, 50, 10, 500, ctx, canvas);
@@ -70,8 +70,12 @@ function animate(timestamp){
     }
     //BGm1.update(x,x2, canvasBGm1, gamespeed)
     
+    for (let index = 0; index < terrainArray.length; index++) {
+        terrainArray[index].draw();
+    
+    }
 
-    terrain.draw();
+    //terrain.draw();
     controls.movePlayer();
 
     drawStatusText(ctx, controls, player);

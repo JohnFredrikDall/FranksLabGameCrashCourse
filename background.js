@@ -9,10 +9,8 @@ export default class Background{
         this.x=x;
         this.y=0;
         this.x2=x2;
-        this.x3=-x2
+        this.x3=-x2;
         this.gamespeed=gamespeed;
-
-        console.log(imageLoc)
     }
 
     getImage(backgroundSRC){
@@ -21,7 +19,6 @@ export default class Background{
 
     drawMoon(){
         this.ctx.drawImage(this.backgroundLayer,0,0,this.canvasBG.width, this.canvasBG.height)
-        
     }
     drawBackground(){
         this.ctx.drawImage(this.backgroundLayer,this.x,this.y,this.canvasBG.width, this.canvasBG.height)
@@ -36,10 +33,6 @@ export default class Background{
         }else{
             this.x -= this.gamespeed;
         }
-     
-
-  
-    
     }
 
     updateReverse(){
