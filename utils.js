@@ -315,3 +315,20 @@ export function drawSpriteFrames(player) {
       }
     }
   }
+
+  //Brukes til å teste drawImage() ATM
+    // let x = 190;
+    // let y = 5;
+
+    // ctx.drawImage(this.playerImage, frame.x + this.frame * this.spriteWidth, frame.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+    // this.ctx.drawImage(
+    //   this.playerImage,
+    //   x + this.frame * this.spriteWidth,
+    //   y,
+    //   this.spriteWidth,
+    //   this.spriteHeight,
+    //   this.x,
+    //   this.y,
+    //   this.width,
+    //   this.height
+    // );
