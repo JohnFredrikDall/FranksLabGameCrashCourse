@@ -72,8 +72,7 @@ export default class Player {
     this.gravitySpeed += this.gravity;
     this.currentState.handleInput(input); 
     this.y += this.gravitySpeed;
-    // this.friction();
-    // this.x += this.moveSpeed;
+    
     this.hitBottom();
   }
 
@@ -81,23 +80,6 @@ export default class Player {
     this.ctx.fillStyle = "rgba(0, 0, 0, 0)";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
     drawSpriteFrames(this);
-
-    //Brukes til å teste drawImage() ATM
-    // let x = 190;
-    // let y = 5;
-
-    // ctx.drawImage(this.playerImage, frame.x + this.frame * this.spriteWidth, frame.y, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
-    // this.ctx.drawImage(
-    //   this.playerImage,
-    //   x + this.frame * this.spriteWidth,
-    //   y,
-    //   this.spriteWidth,
-    //   this.spriteHeight,
-    //   this.x,
-    //   this.y,
-    //   this.width,
-    //   this.height
-    // );
   }
 
   checkForCollision() {
@@ -111,7 +93,6 @@ export default class Player {
 
   checkMoving(){
     if(this.currentState.state == 'RUNNING LEFT' ||this.currentState.state== 'JUMPING LEFT'){
-      console.log(this.currentState.state)
       return 1;
     }if (this.currentState.state == 'RUNNING RIGHT'|| this.currentState.state== 'JUMPING RIGHT') {
       return 2;
