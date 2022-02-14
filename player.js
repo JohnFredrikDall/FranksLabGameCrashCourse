@@ -75,12 +75,21 @@ export default class Player {
     
     this.hitBottom();
   }
-
+  
   draw() {
     this.ctx.fillStyle = "rgba(0, 0, 0, 0)";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
     drawSpriteFrames(this);
   }
+  
+  hitLeftEdge(){
+    this.x = 0;
+  }
+
+  hitRightEdge(){
+    this.x = (this.canvas.width - this.width);
+  }
+
 
   checkForCollision() {
     if (!this.affectedByGravity) {
@@ -91,16 +100,6 @@ export default class Player {
     }
   }
 
-  checkMoving(){
-    if(this.currentState.state == 'RUNNING LEFT' ||this.currentState.state== 'JUMPING LEFT'){
-      return 1;
-    }if (this.currentState.state == 'RUNNING RIGHT'|| this.currentState.state== 'JUMPING RIGHT') {
-      return 2;
-    } else {
-      return 0;
-    }
-    
-  }
   hitBottom() {
     var bottom = this.canvas.height - this.height;
     if (this.y > bottom) {

@@ -4,7 +4,7 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-canvas {
+#canvasFront {
     position: absolute;
     z-index: 1;
     background: transparent;
@@ -14,7 +14,7 @@ canvas {
     height: 100%;
 }
 
-#canvasBG0{
+#canvasMiddle{
     position: absolute;
     background: transparent;
     z-index: 0;
@@ -24,7 +24,7 @@ canvas {
     height: 100%;
 }
 
-#canvasBG-1{
+#canvasBack{
     position: absolute;
     background: transparent;
     z-index: -1;
