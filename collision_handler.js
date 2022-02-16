@@ -1,5 +1,8 @@
 export default class CollisionHandler{
-    constructor(){}
+    constructor(player, background){
+        this.player = player;
+        this.background = background;
+    }
 
     detectCollision(player, terrainArray){
         for (let i = 0; i < terrainArray.length; i++) {
@@ -39,5 +42,14 @@ export default class CollisionHandler{
     correctDistanceFromTerrain(player, terrain){
         return ((player.y + player.height)>=terrain.y -10)
     }
+
+    edgePan(){
+        if(this.background.edgePanningLeft){
+            this.player.hitLeftEdge();
+        }
+        else if(this.background.edgePanningRight){
+            this.player.hitRightEdge();
+        }
+      }
 }
 
