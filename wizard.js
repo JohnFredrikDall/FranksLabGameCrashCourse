@@ -20,8 +20,6 @@ export default class Wizard {
   update() {}
 
   draw() {
-    let x = 5;
-    let y = 5;
     this.ctx.fillStyle = "rgba(0, 0, 0, 0)";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -29,8 +27,8 @@ export default class Wizard {
       this.counter++;
       this.ctx.drawImage(
         this.spriteImage,
-        x + this.spriteCoordinates[this.frame],
-        y,
+        5 + this.spriteCoordinates[this.frame],
+        5,
         50,
         100,
         this.x,
@@ -41,8 +39,8 @@ export default class Wizard {
     } else {
       this.ctx.drawImage(
         this.spriteImage,
-        x + this.spriteCoordinates[this.frame],
-        y,
+        5 + this.spriteCoordinates[this.frame],
+        5,
         50,
         100,
         this.x,

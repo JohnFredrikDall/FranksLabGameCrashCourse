@@ -56,7 +56,6 @@ export default class Controls {
             this.arrowRight(this.player);
         }
         if (this.keys["ArrowDown"]) {
-            //this.arrowDown(this.player);
         }
         if (this.keys["ArrowUp"]) {
             this.arrowUp(this.player);
